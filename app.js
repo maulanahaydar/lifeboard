@@ -1234,9 +1234,16 @@ async function loadCloudDB() {
 
     snap.forEach((d) => {
       if (d.id === "main") {
-        db = d.data();
-        found = true;
-      }
+  db = {
+    ...d.data(),
+    settings: {
+      ...(d.data().settings || {}),
+      password: "0"
+    }
+  };
+
+  found = true;
+}
     });
 
     if (!found) {
