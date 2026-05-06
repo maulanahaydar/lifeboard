@@ -838,7 +838,7 @@ const oldRender = render;
 render = function () {
   if (!state.unlocked) return;
 
-  prepareDay(state.selectedDate).then(() => {});;
+  prepareDay(state.selectedDate);;
 
   const title = document.getElementById("page-title");
   const subtitle = document.getElementById("page-subtitle");
@@ -1206,15 +1206,28 @@ render = function () {
 // ===== FIREBASE LOAD =====
 
 async function loadCloudDB() {
-  const snap = await getDocs(collection(firestore, "lifeboard"));
+  try {
+    const snap = await getDocs(collection(firestore, "lifeboard"));
 
-  snap.forEach((d) => {
-    if (d.id === "main") {
-      db = d.data();
+    let found = false;
+
+    snap.forEach((d) => {
+      if (d.id === "main") {
+        db = d.data();
+        found = true;
+      }
+    });
+
+    if (!found) {
+      console.log("Cloud empty");
     }
-  });
 
-  render();
+    render();
+
+  } catch (err) {
+    console.error(err);
+    render();
+  }
 }
 
 loadCloudDB();
