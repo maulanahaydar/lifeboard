@@ -286,10 +286,9 @@ function carryOverYesterday(dateStr) {
   });
 }
 
-async function prepareDay(dateStr) {
+function prepareDay(dateStr) {
   ensureHabitActivities(dateStr);
   carryOverYesterday(dateStr);
-  await saveDB();
 }
 
 function getActivitiesByDate(dateStr) {
@@ -996,8 +995,6 @@ function scrollToCurrentRow() {
     block: "center"
   });
 }
-
-render();
 
 // ===== PATCH v1 =====
 
