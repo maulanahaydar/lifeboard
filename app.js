@@ -243,16 +243,20 @@ function ensureHabitActivities(dateStr) {
 
     if (exists) return;
 
-    createActivity({
-      title: h.title,
-      date: dateStr,
-      time: h.time,
-      duration: h.duration,
-      note: h.note,
-      category: h.category,
-      source: "habit",
-      sourceId: h.id
-    });
+db.activities.push({
+  id: uid(),
+  title: h.title,
+  date: dateStr,
+  time: h.time,
+  duration: h.duration,
+  note: h.note,
+  category: h.category,
+  source: "habit",
+  sourceId: h.id,
+  status: "pending",
+  createdAt: new Date().toISOString(),
+  completedAt: null
+});
   });
 }
 
