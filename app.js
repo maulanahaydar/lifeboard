@@ -411,6 +411,24 @@ function bindStaticEvents() {
   });
 
   document.getElementById("import-file").addEventListener("change", importJSON);
+
+  const fabBtn = document.getElementById("fab-btn");
+const fabPanel = document.getElementById("fab-panel");
+
+if (fabBtn) {
+  fabBtn.addEventListener("click", () => {
+    fabPanel.classList.toggle("hidden");
+  });
+}
+
+document.querySelectorAll(".fab-item").forEach(btn => {
+  btn.addEventListener("click", () => {
+    state.panelTab = btn.dataset.tab;
+    fabPanel.classList.remove("hidden");
+    renderSidePanel();
+  });
+});
+
 }
 
 function exportJSON() {
@@ -501,6 +519,11 @@ function bindDashboard() {
 
 function renderSidePanel() {
   const panel = document.getElementById("side-panel-content");
+  const fabPanel = document.getElementById("fab-panel");
+
+  if (fabPanel) {
+    fabPanel.classList.remove("hidden");
+  }
 
   if (state.panelTab === "openloop") {
     const items = getOpenLoop();
