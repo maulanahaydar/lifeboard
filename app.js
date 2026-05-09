@@ -1084,6 +1084,8 @@ renderSidePanel = function () {
     };
 
     panel.innerHTML = `
+  <div class="modal-overlay">
+    <div class="modal-card">
       <h3 style="margin-bottom:14px">Add / Edit</h3>
 
       <div class="form-group">
@@ -1140,7 +1142,8 @@ renderSidePanel = function () {
     background:#334155;
   ">Cancel</button>
 </div>
-    `;
+</div>
+`;
 
     document.getElementById("editor-save").onclick = saveEditor;
     document.getElementById("editor-cancel").onclick = () => {
